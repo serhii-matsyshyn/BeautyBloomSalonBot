@@ -9,6 +9,9 @@ BOT_TOKEN = environ['BOT_TOKEN']
 # DATABASE_HOST = environ['DATABASE_HOST']
 # DATABASE_PORT = environ['DATABASE_PORT']
 
+# Or just use DATABASE_URL from Heroku:
+DATABASE_URL = environ['DATABASE_URL']
+
 PROVIDER_TOKEN = environ['PROVIDER_TOKEN']
 
 DJANGO_SECRET_KEY = environ['DJANGO_SECRET_KEY']
