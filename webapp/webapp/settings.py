@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/?.?/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/?.?/ref/settings/
 """
-
+import os
 from pathlib import Path
 import dj_database_url
 
@@ -80,7 +80,8 @@ WSGI_APPLICATION = 'webapp.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/?.?/ref/settings/#databases
 
-DATABASES = {'default': dj_database_url.config(default='postgres://user:pass@localhost/dbname')}
+DATABASES = {'default': dj_database_url.config(default=DATABASE_URL)}
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 
 # Password validation
