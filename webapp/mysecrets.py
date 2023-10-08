@@ -12,6 +12,8 @@ BOT_TOKEN = environ['BOT_TOKEN']
 # Or just use DATABASE_URL from Heroku:
 DATABASE_URL = environ['DATABASE_URL']
 
+WEBAPP_URL = environ['WEBAPP_URL']
+
 PROVIDER_TOKEN = environ['PROVIDER_TOKEN']
 
 DJANGO_SECRET_KEY = environ['DJANGO_SECRET_KEY']
