@@ -11,6 +11,8 @@ https://docs.djangoproject.com/en/?.?/ref/settings/
 """
 
 from pathlib import Path
+import dj_database_url
+
 
 
 from mysecrets import *
@@ -78,16 +80,7 @@ WSGI_APPLICATION = 'webapp.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/?.?/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': DATABASE_ENGINE,
-        'NAME': DATABASE_NAME,
-        'USER': DATABASE_USER,
-        'PASSWORD': DATABASE_PASSWORD,
-        'HOST': DATABASE_HOST,
-        'PORT': DATABASE_PORT,
-    }
-}
+DATABASES = {'default': dj_database_url.config(default='postgres://user:pass@localhost/dbname')}
 
 
 # Password validation
