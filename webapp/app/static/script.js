@@ -76,11 +76,11 @@ function stylizeDate(dateIsoformat) {
 
 	let today = new Date();
 	if (today.toISOString().slice(0, 9 + 1) == dateIsoformat) {
-		return "Today";
+		return "today";
 	} else {
 		today.setDate(today.getDate() + 1);
 		if (today.toISOString().slice(0, 9 + 1) == dateIsoformat) {
-			return "Tomorrow";
+			return "tomorrow";
 		} else {
 			return `${months[monthInt - 1]}, ${day}`;
 		}
@@ -162,7 +162,7 @@ MainButton.onClick(function() {
 		}
 
 		let requestParams = {
-			'description': `Haircut for you on ${stylizeDate(selectedDateIsoformat)} at ${stylizeTime(selectedTimeIsoformat)}`,
+			'description': `Beauty salon services for you on ${stylizeDate(selectedDateIsoformat)} at ${stylizeTime(selectedTimeIsoformat)}`,
 			'prices': JSON.stringify(prices),
 			'payload': `${window.userId} ${window.initMessageId} ${JSON.stringify(selectedServicesIds)} ${selectedDateIsoformat} ${selectedTimeIsoformat}`,
 
