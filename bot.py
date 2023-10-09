@@ -15,25 +15,14 @@ from webapp.mysecrets import BOT_TOKEN, WEBAPP_URL, WEBHOOK_SECRET  # Importing 
 from aiohttp import web
 
 from aiogram import Router
-from aiogram.enums import ParseMode
-from aiogram.filters import CommandStart
-from aiogram.types import FSInputFile, Message
-from aiogram.utils.markdown import hbold
 from aiogram.webhook.aiohttp_server import SimpleRequestHandler, setup_application
 
 # Webserver settings
-# bind localhost only to prevent any external access
 WEB_SERVER_HOST = "0.0.0.0"
-# Port for incoming request from reverse proxy. Should be any available port
 WEB_SERVER_PORT = int(os.getenv('PORT'))
 
 # Path to webhook route, on which Telegram will send requests
 WEBHOOK_PATH = "/webhook"
-# Secret key to validate requests from Telegram (optional)
-# Base URL for webhook will be used to generate webhook URL for Telegram,
-# in this example it is used public address with TLS support
-BASE_WEBHOOK_URL = "https://beauty-bloom-salon-bot-e05fc31e51e7.herokuapp.com"  # :8443
-
 
 
 # Configure logging for the application
@@ -372,13 +361,10 @@ async def main():
 
 # Check if the script is being run directly
 if __name__ == '__main__':
+    # Local run and develop
     # asyncio.run(main())  # Run the main function to start polling the bot
 
-    # Webhook:
-
-    # Dispatcher is a root router
-    # dp = Dispatcher()
-    # ... and all other routers should be attached to Dispatcher
+    # Server setup
     dp.include_router(router)
 
     # Register startup hook to initialize webhook
@@ -400,10 +386,6 @@ if __name__ == '__main__':
 
     # Mount dispatcher startup and shutdown hooks to aiohttp application
     setup_application(app, dp, bot=bot)
-
-    # Generate SSL context
-    # context = ssl.SSLContext(ssl.PROTOCOL_TLSv1_2)
-    # context.load_cert_chain(WEBHOOK_SSL_CERT, WEBHOOK_SSL_PRIV)
 
     # And finally start webserver
     web.run_app(app, host=WEB_SERVER_HOST, port=WEB_SERVER_PORT)  #, ssl_context=context
