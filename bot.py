@@ -2,6 +2,7 @@ import asyncio
 import datetime
 import logging
 import ssl
+from urllib.parse import quote
 from typing import Union, Tuple
 
 import requests
@@ -28,10 +29,12 @@ WEB_SERVER_PORT = 4000
 # Path to webhook route, on which Telegram will send requests
 WEBHOOK_PATH = "/webhook"
 # Secret key to validate requests from Telegram (optional)
-WEBHOOK_SECRET = BOT_TOKEN
+WEBHOOK_SECRET = quote(BOT_TOKEN, safe='')
 # Base URL for webhook will be used to generate webhook URL for Telegram,
 # in this example it is used public address with TLS support
 BASE_WEBHOOK_URL = "https://beauty-bloom-salon-bot-e05fc31e51e7.herokuapp.com:4000"
+
+
 
 # Configure logging for the application
 logging.basicConfig(level=logging.INFO)
