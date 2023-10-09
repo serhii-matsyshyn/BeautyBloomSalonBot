@@ -59,8 +59,19 @@ DATABASE_USER = <Database User>
 DATABASE_PASSWORD = <Database Password>
 DATABASE_HOST = <Database Host>
 DATABASE_PORT = <Database Port>
+
+# Or just use DATABASE_URL from Heroku:
+DATABASE_URL = <Database URL>
+
 PROVIDER_TOKEN = <Telegram Payment Provider Token>
 DJANGO_SECRET_KEY = <Django Secret Key>
+
+WEBAPP_URL = <Web App URL>
+
+# For server-side webhook:
+# WEBHOOK_SECRET = <Webhook Secret>
+#
+# BASE_WEBHOOK_URL = <Base Webhook URL>
 ```
 
 Run Django migrations:
