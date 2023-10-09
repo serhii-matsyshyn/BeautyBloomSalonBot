@@ -24,7 +24,7 @@ from aiogram.webhook.aiohttp_server import SimpleRequestHandler, setup_applicati
 # bind localhost only to prevent any external access
 WEB_SERVER_HOST = "0.0.0.0"
 # Port for incoming request from reverse proxy. Should be any available port
-WEB_SERVER_PORT = 4000
+WEB_SERVER_PORT = 8443
 
 # Path to webhook route, on which Telegram will send requests
 WEBHOOK_PATH = "/webhook"
