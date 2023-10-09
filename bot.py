@@ -9,7 +9,7 @@ import requests
 from aiogram import Bot, Dispatcher, types, F
 from aiogram.filters import Command
 
-from webapp.mysecrets import BOT_TOKEN, WEBAPP_URL  # Importing mysecrets (BOT_TOKEN and WEBAPP_URL)
+from webapp.mysecrets import BOT_TOKEN, WEBAPP_URL, WEBHOOK_SECRET  # Importing mysecrets (BOT_TOKEN and WEBAPP_URL)
 
 from aiohttp import web
 
@@ -29,7 +29,6 @@ WEB_SERVER_PORT = 4000
 # Path to webhook route, on which Telegram will send requests
 WEBHOOK_PATH = "/webhook"
 # Secret key to validate requests from Telegram (optional)
-WEBHOOK_SECRET = quote(BOT_TOKEN, safe='')
 # Base URL for webhook will be used to generate webhook URL for Telegram,
 # in this example it is used public address with TLS support
 BASE_WEBHOOK_URL = "https://beauty-bloom-salon-bot-e05fc31e51e7.herokuapp.com:4000"
