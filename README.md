@@ -119,6 +119,8 @@ To use BeautyBloomSalonBot as an administrator, follow these steps:
 ## Deployment
 To deploy BeautyBloomSalonBot to Heroku, follow the steps from the [official tutorials](https://devcenter.heroku.com/categories/python-support). It is easy, and if you follow the instructions, you will be able to deploy your bot in no time (in less then 10 minutes).  
 Make sure to set the environment variables in Heroku as well, and to add the PostgreSQL add-on. Use strong passwords for your database and admin panel.
+Modify the Procfile to match your project structure, and edit mysecrets.py to match your environment and bot.py (db type etc) - see comments in files.  
+To deploy on heroku, use 2 dynos (1 for the bot, 1 for the web app). Edit the Procfile accordingly.  
 
 ## Troubleshooting
 If you encounter any issues, please refer to the [official documentation](https://core.telegram.org/bots).  

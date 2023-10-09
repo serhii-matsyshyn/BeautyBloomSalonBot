@@ -2,6 +2,7 @@ from os import environ
 
 BOT_TOKEN = environ['BOT_TOKEN']
 
+# For local development:
 # DATABASE_ENGINE = environ['DATABASE_ENGINE']
 # DATABASE_NAME = environ['DATABASE_NAME']
 # DATABASE_USER = environ['DATABASE_USER']
@@ -18,6 +19,7 @@ PROVIDER_TOKEN = environ['PROVIDER_TOKEN']
 
 DJANGO_SECRET_KEY = environ['DJANGO_SECRET_KEY']
 
-WEBHOOK_SECRET = environ['WEBHOOK_SECRET']
-
-BASE_WEBHOOK_URL = environ['BASE_WEBHOOK_URL']
+# For server-side webhook:
+# WEBHOOK_SECRET = environ['WEBHOOK_SECRET']
+#
+# BASE_WEBHOOK_URL = environ['BASE_WEBHOOK_URL']
