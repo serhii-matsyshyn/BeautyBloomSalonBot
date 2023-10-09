@@ -30,7 +30,7 @@ SECRET_KEY = DJANGO_SECRET_KEY
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1']
+ALLOWED_HOSTS = ['beauty-bloom-salon-bot-e05fc31e51e7.herokuapp.com', '127.0.0.1']
 
 
 # Application definition
@@ -81,7 +81,6 @@ WSGI_APPLICATION = 'webapp.wsgi.application'
 # https://docs.djangoproject.com/en/?.?/ref/settings/#databases
 
 DATABASES = {'default': dj_database_url.config(default=DATABASE_URL)}
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 
 # Password validation
@@ -119,6 +118,11 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/?.?/howto/static-files/
 
 STATIC_URL = 'static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'static'),
+)
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/?.?/ref/settings/#default-auto-field

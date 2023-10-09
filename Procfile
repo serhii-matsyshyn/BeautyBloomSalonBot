@@ -1,1 +1,1 @@
-web: python webapp/manage.py runserver 0.0.0.0:5000
+web: gunicorn webapp/app.wsgi -log-file -
