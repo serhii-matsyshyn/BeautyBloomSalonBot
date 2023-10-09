@@ -359,33 +359,37 @@ async def main():
     await dp.start_polling(bot)
 
 
+def run_on_server_webhooks():
+    dp.include_router(router)
+
+    # Register startup hook to initialize webhook
+    dp.startup.register(on_startup)
+
+    # Create aiohttp.web.Application instance
+    app = web.Application()
+
+    # Create an instance of request handler,
+    # aiogram has few implementations for different cases of usage
+    # In this example we use SimpleRequestHandler which is designed to handle simple cases
+    webhook_requests_handler = SimpleRequestHandler(
+        dispatcher=dp,
+        bot=bot,
+        secret_token=WEBHOOK_SECRET,
+    )
+    # Register webhook handler on application
+    webhook_requests_handler.register(app, path=WEBHOOK_PATH)
+
+    # Mount dispatcher startup and shutdown hooks to aiohttp application
+    setup_application(app, dp, bot=bot)
+
+    # And finally start webserver
+    web.run_app(app, host=WEB_SERVER_HOST, port=WEB_SERVER_PORT)
+
+
 # Check if the script is being run directly
 if __name__ == '__main__':
     # Local run and develop
     asyncio.run(main())  # Run the main function to start polling the bot
 
     # # Server setup
-    # dp.include_router(router)
-    #
-    # # Register startup hook to initialize webhook
-    # dp.startup.register(on_startup)
-    #
-    # # Create aiohttp.web.Application instance
-    # app = web.Application()
-    #
-    # # Create an instance of request handler,
-    # # aiogram has few implementations for different cases of usage
-    # # In this example we use SimpleRequestHandler which is designed to handle simple cases
-    # webhook_requests_handler = SimpleRequestHandler(
-    #     dispatcher=dp,
-    #     bot=bot,
-    #     secret_token=WEBHOOK_SECRET,
-    # )
-    # # Register webhook handler on application
-    # webhook_requests_handler.register(app, path=WEBHOOK_PATH)
-    #
-    # # Mount dispatcher startup and shutdown hooks to aiohttp application
-    # setup_application(app, dp, bot=bot)
-    #
-    # # And finally start webserver
-    # web.run_app(app, host=WEB_SERVER_HOST, port=WEB_SERVER_PORT)
+    # run_on_server_webhooks()
