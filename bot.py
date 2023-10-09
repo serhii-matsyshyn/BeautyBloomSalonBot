@@ -31,7 +31,7 @@ WEBHOOK_PATH = "/webhook"
 # Secret key to validate requests from Telegram (optional)
 # Base URL for webhook will be used to generate webhook URL for Telegram,
 # in this example it is used public address with TLS support
-BASE_WEBHOOK_URL = "https://beauty-bloom-salon-bot-e05fc31e51e7.herokuapp.com:4000"
+BASE_WEBHOOK_URL = "https://beauty-bloom-salon-bot-e05fc31e51e7.herokuapp.com:8443"
 
 
 
