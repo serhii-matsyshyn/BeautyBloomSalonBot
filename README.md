@@ -147,6 +147,7 @@ Common issues:
 - If you have security concerns, implement secure authentication and authorization mechanisms to protect user data. Regularly update your bot's security practices. This bot is not intended for production use, so make sure to implement security measures if you want to use it in production.
 
 ## Test it now!
+Since it is deployed on Heroku, it may take some time to start the bot after the time of inactivity.  
 Try this bot in action: [@BeautyBloomSalonBot](https://t.me/BeautyBloomSalonBot)
 
 ## Contributing
