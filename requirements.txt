@@ -6,3 +6,4 @@ dj-database-url==2.1.0
 django_extensions==3.2.1
 Werkzeug==3.0.0
 pyOpenSSL==23.2.0
+gunicorn==21.2.0
