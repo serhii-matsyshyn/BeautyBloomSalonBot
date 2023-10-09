@@ -148,7 +148,8 @@ Common issues:
 
 ## Test it now!
 Since it is deployed on Heroku, it may take some time to start the bot after the time of inactivity.  
-Try this bot in action: [@BeautyBloomSalonBot](https://t.me/BeautyBloomSalonBot)
+Try this bot in action: [@BeautyBloomSalonBot](https://t.me/BeautyBloomSalonBot)  
+For payments, use test stripe card 4242424242424242, any future date, any CVC, and any other data.
 
 ## Contributing
 If you'd like to contribute to BeautyBloomSalonBot, please follow our contribution guidelines.
