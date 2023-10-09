@@ -128,10 +128,14 @@ async def menu(event: Union[types.Message, types.CallbackQuery], init_message_ed
         event (Union[types.Message, types.CallbackQuery]): The incoming event that triggered this menu.
         init_message_editable (bool, optional): Whether the initial message is editable (for callback queries). Default is True.
     """
+    if type(event) is types.Message:
+        msg_id = event.message_id
+    else:
+        msg_id = event.message.message_id
     # Define inline keyboard markup for the menu
     inline_keyboard_markup = types.InlineKeyboardMarkup(inline_keyboard=[
         [types.InlineKeyboardButton(text="Services", web_app=types.WebAppInfo(
-            url=f'{WEBAPP_URL}/make_order?init_message_id={event.message.message_id}'))],
+            url=f'{WEBAPP_URL}/make_order?init_message_id={msg_id}'))],
         [types.InlineKeyboardButton(text="Information", callback_data='info')],
         [types.InlineKeyboardButton(text="Active Appointments", callback_data='active')]
     ])
