@@ -1,1 +1,1 @@
-web: gunicorn --chdir ./webapp webapp.wsgi
+web: python bot.py
