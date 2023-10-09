@@ -373,7 +373,7 @@ if __name__ == '__main__':
     # Webhook:
 
     # Dispatcher is a root router
-    dp = Dispatcher()
+    # dp = Dispatcher()
     # ... and all other routers should be attached to Dispatcher
     dp.include_router(router)
 
