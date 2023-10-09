@@ -109,7 +109,8 @@ python webapp/manage.py createsuperuser
 Then in your browser, navigate to https://localhost:8000/admin and log in with the credentials you created.  
 You will be able to add or edit Services, and set price for each service.
 
-For default, the appointment time is set to 1 hour. It can be easily customized if you want to add some new functionality (for instance, set specific time it takes for some service etc).
+For default, the appointment time is set to 1 hour. It can be easily customized if you want to add some new functionality (for instance, set specific time it takes for some service etc).  
+By default, the appointments are created only after the payment is successful. If you need to store appointments even if the payment is not successful (or save payment time etc), you can easily customize it in the code.
 
 ## Usage:
 To use BeautyBloomSalonBot as a user, follow these steps:
