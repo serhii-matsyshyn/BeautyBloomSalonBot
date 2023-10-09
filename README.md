@@ -1,8 +1,8 @@
 # BeautyBloomSalonBot - Telegram Bot for Beauty Salon
 
-BeautyBloomSalonBot is a Telegram bot that allows users to make appointments and pay for services using the built-in Telegram payment provider.  
+@BeautyBloomSalonBot is a demo Telegram bot based on Mini App that allows users to choose services and make appointments at the beauty salon, and pay for services using the built-in Telegram payment provider.  
 **It is based on Mini App!**  
-The web app for handling appointments is powered by Django, aiogram, and PostgreSQL. This README provides detailed instructions on how to set up and use the bot.  
+The web app for handling appointments is powered by Django, aiogram, and PostgreSQL. It is hosted at Heroku. This README provides detailed instructions on how to set up and use the bot.  
 **Try this bot in action: [@BeautyBloomSalonBot](https://t.me/BeautyBloomSalonBot)**
 
 ## Table of Contents
