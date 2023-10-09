@@ -10,7 +10,7 @@ import requests
 from aiogram import Bot, Dispatcher, types, F
 from aiogram.filters import Command
 
-from webapp.mysecrets import BOT_TOKEN, WEBAPP_URL, WEBHOOK_SECRET  # Importing mysecrets (BOT_TOKEN and WEBAPP_URL)
+from webapp.mysecrets import BOT_TOKEN, WEBAPP_URL, WEBHOOK_SECRET, BASE_WEBHOOK_URL  # Importing mysecrets (BOT_TOKEN and WEBAPP_URL)
 
 from aiohttp import web
 
