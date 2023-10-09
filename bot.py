@@ -1,6 +1,7 @@
 import asyncio
 import datetime
 import logging
+import ssl
 from typing import Union, Tuple
 
 import requests
@@ -9,12 +10,49 @@ from aiogram.filters import Command
 
 from webapp.mysecrets import BOT_TOKEN, WEBAPP_URL  # Importing mysecrets (BOT_TOKEN and WEBAPP_URL)
 
+from aiohttp import web
+
+from aiogram import Router
+from aiogram.enums import ParseMode
+from aiogram.filters import CommandStart
+from aiogram.types import FSInputFile, Message
+from aiogram.utils.markdown import hbold
+from aiogram.webhook.aiohttp_server import SimpleRequestHandler, setup_application
+
+# Webserver settings
+# bind localhost only to prevent any external access
+WEB_SERVER_HOST = "0.0.0.0"
+# Port for incoming request from reverse proxy. Should be any available port
+WEB_SERVER_PORT = 4000
+
+# Path to webhook route, on which Telegram will send requests
+WEBHOOK_PATH = "/webhook"
+# Secret key to validate requests from Telegram (optional)
+WEBHOOK_SECRET = BOT_TOKEN
+# Base URL for webhook will be used to generate webhook URL for Telegram,
+# in this example it is used public address with TLS support
+BASE_WEBHOOK_URL = "https://beauty-bloom-salon-bot-e05fc31e51e7.herokuapp.com:4000"
+
 # Configure logging for the application
 logging.basicConfig(level=logging.INFO)
 
 # Initialize the bot and dispatcher
 bot = Bot(token=BOT_TOKEN)  # Create a bot instance using the provided BOT_TOKEN
 dp = Dispatcher()
+
+router = Router()
+
+
+async def on_startup(bot: Bot) -> None:
+    # In case when you have a self-signed SSL certificate, you need to send the certificate
+    # itself to Telegram servers for validation purposes
+    # (see https://core.telegram.org/bots/self-signed)
+    # But if you have a valid SSL certificate, you SHOULD NOT send it to Telegram servers.
+    await bot.set_webhook(
+        f"{BASE_WEBHOOK_URL}{WEBHOOK_PATH}",
+        # certificate=FSInputFile(WEBHOOK_SSL_CERT),
+        secret_token=WEBHOOK_SECRET,
+    )
 
 
 # Define an asynchronous function to process incoming events
@@ -327,4 +365,38 @@ async def main():
 
 # Check if the script is being run directly
 if __name__ == '__main__':
-    asyncio.run(main())  # Run the main function to start polling the bot
+    # asyncio.run(main())  # Run the main function to start polling the bot
+
+    # Webhook:
+
+    # Dispatcher is a root router
+    dp = Dispatcher()
+    # ... and all other routers should be attached to Dispatcher
+    dp.include_router(router)
+
+    # Register startup hook to initialize webhook
+    dp.startup.register(on_startup)
+
+    # Create aiohttp.web.Application instance
+    app = web.Application()
+
+    # Create an instance of request handler,
+    # aiogram has few implementations for different cases of usage
+    # In this example we use SimpleRequestHandler which is designed to handle simple cases
+    webhook_requests_handler = SimpleRequestHandler(
+        dispatcher=dp,
+        bot=bot,
+        secret_token=WEBHOOK_SECRET,
+    )
+    # Register webhook handler on application
+    webhook_requests_handler.register(app, path=WEBHOOK_PATH)
+
+    # Mount dispatcher startup and shutdown hooks to aiohttp application
+    setup_application(app, dp, bot=bot)
+
+    # Generate SSL context
+    context = ssl.SSLContext(ssl.PROTOCOL_TLSv1_2)
+    # context.load_cert_chain(WEBHOOK_SSL_CERT, WEBHOOK_SSL_PRIV)
+
+    # And finally start webserver
+    web.run_app(app, host=WEB_SERVER_HOST, port=WEB_SERVER_PORT, ssl_context=context)
